@@ -1,0 +1,63 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Brother QL Label Printer
+version: "1.0.0"
+slug: brother-ql-label-printer
+description: "Print labels on Brother QL label printers"
+url: "https://github.com/martydingo/brother-ql-label-printer/tree/main/brother-ql-label-printer"
+arch:
+  # - armhf
+  # - armv7
+  # - i386
+  # - amd64
+  - aarch64
+init: false
+map:
+  - share:rw
+options:
+  SERVER:
+    PORT: "8013"
+    HOST: ""
+    LOGLEVEL: "info"
+    ADDITIONAL_FONT_FOLDER: "/usr/share/fonts"
+  PRINTER:
+    MODEL: "QL-810W"
+    PRINTER: "tcp://127.0.0.1:9100"
+  LABEL:
+    DEFAULT_SIZE: "62red"
+    DEFAULT_ORIENTATION: "standard"
+    DEFAULT_FONT_SIZE: "70"
+    DEFAULT_FONTS:
+      []
+      # - family: "DejaVu Serif Mono"
+      #   style: "Book"
+  WEBSITE:
+    HTML_TITLE: "Brother QL Label Printer"
+    PAGE_TITLE: "Brother QL Label Printer"
+    PAGE_HEADLINE: "Print labels on Brother QL label printers"
+schema:
+  SERVER:
+    PORT: int
+    HOST: "str?"
+    LOGLEVEL: str
+    ADDITIONAL_FONT_FOLDER: "str?"
+  PRINTER:
+    MODEL: str
+    PRINTER: str
+  LABEL:
+    DEFAULT_SIZE: str
+    DEFAULT_ORIENTATION: str
+    DEFAULT_FONT_SIZE: int
+    DEFAULT_FONTS:
+      - str
+  WEBSITE:
+    HTML_TITLE: str
+    PAGE_TITLE: str
+    PAGE_HEADLINE: str
+# image: "martydingo/brother-ql-label-printer-{arch}"
+webui: http://[HOST]:[PORT:8013]/
+ingress: true
+ingress_port: 8013
+ingress_entry: /labeldesigner
+# ingress_stream: true
+ports:
+  "8013/tcp": 8013
